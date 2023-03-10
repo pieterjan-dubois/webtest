@@ -1,0 +1,3 @@
+class Bookcopy {
+    id?: number;
+  }
