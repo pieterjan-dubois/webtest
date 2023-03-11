@@ -1,37 +1,30 @@
-import { Book } from './book';
+import { Book } from '../model/book';
 
-class BookDataAccess {
-    private books: Book[] = [
-        new Book('The Great Gatsby', new Date(1925, 3, 10), 'F. Scott Fitzgerald', 'Scribner'),
-        new Book('To Kill a Mockingbird', new Date(1960, 6, 11), 'Harper Lee', 'J. B. Lippincott & Co.'),
-        new Book('1984', new Date(1949, 5, 8), 'George Orwell', 'Secker & Warburg')
+
+    let currentId = 1;
+
+    const books: Book[] = [
+        Book.create({id:currentId++, title:'To Kill a Mockingbird', year:new Date(1960, 6, 11), author:'Harper Lee', publisher:'J. B. Lippincott & Co.'}),
+        Book.create({id:currentId++, title: '1984', year: new Date(1949, 5, 8), author: 'George Orwell', publisher: 'Secker & Warburg'}),
+        Book.create({id:currentId++, title: 'Pride and Prejudice', year: new Date(1813, 0, 28), author: 'Jane Austen', publisher: 'T. Egerton, Whitehall'}),
+        Book.create({id:currentId++, title: 'The Great Gatsby', year: new Date(1925, 3, 10), author: 'F. Scott Fitzgerald', publisher: 'Scribner'}),
+        Book.create({id:currentId++, title: 'The Catcher in the Rye', year: new Date(1951, 6, 16), author: 'J.D. Salinger', publisher: 'Little, Brown and Company'})
     ];
 
-    getAllBooks = (): Book[] => {
-        return this.books;
-    };
+const getAllBooks = (): Book[] => books;
 
-    getBookById = ({ id }: { id: number }): Book | undefined => {
-        return this.books.find(book => book.id === id);
-    };
+const getBookById = ({ id }: { id: number }): Book => books.find(book => book.id === id);
 
-    addBook = (book: Book): void => {
-        this.books.push(book);
-    };
+const addBook = (book: Book): number => books.push(book);
 
-    updateBook = (updatedBook: Book): void => {
-        const index = this.books.findIndex(book => book.id === updatedBook.id);
+const updateBook = (updatedBook: Book): void => {
+    const index = books.findIndex(book => book.id === updatedBook.id);
+    if (index !== -1) books[index] = updatedBook;
+};
 
-        if (index !== -1) {
-            this.books[index] = updatedBook;
-        }
-    };
+const deleteBook = (id: number): void => {
+    const index = books.findIndex(book => book.id === id);
+    if (index !== -1) books.splice(index, 1);
+};
 
-    deleteBook = (id: number): void => {
-        const index = this.books.findIndex(book => book.id === id);
-
-        if (index !== -1) {
-            this.books.splice(index, 1);
-        }
-    };
-}
+export default {getAllBooks, getBookById, addBook, updateBook, deleteBook};
