@@ -10,3 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  lastname String
+  address  String
+  email    String  @unique
+  password String
+  loans    Loan[]
+}
+
+model Loan {
+  id        Int    @id @default(autoincrement())
+  title     String
+  author    String
+  begindate DateTime
+  enddate   DateTime
+  userId    Int?
+  user      User?  @relation(fields: [userId], references: [id])
+}

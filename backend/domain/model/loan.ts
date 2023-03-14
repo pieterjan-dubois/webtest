@@ -1,27 +1,29 @@
-class Loan {
+import {User} from "./user";
+
+export class Loan {
     id?: number;
     title: string;
     author: string;
     begindate: Date;
-    expiredate: Date;
-  
-    constructor(title: string, author: string, begindate: Date, expiredate: Date) {
-      if (!title) {
-        throw new Error("Titel is required.");
-      }
-      if (!author) {
-        throw new Error("Author is required.");
-      }
-      if (!begindate) {
-        throw new Error("Begin date is required.");
-      }
-      if (!expiredate) {
-        throw new Error("Expire date is required.");
-      }
-  
-      this.title = title;
-      this.author = author;
-      this.begindate = begindate;
-      this.expiredate = expiredate;
+    enddate: Date;
+    user: User;
+
+    constructor(title: string, author: string, begindate: Date, enddate: Date, user: User) {
+        this.title = title;
+        this.author = author;
+        this.begindate = begindate;
+        this.enddate = enddate;
+        this.user = user;
     }
-  }
+
+    static create({id, title, author, begindate, enddate, user}: {id?: number, title: string, author: string, begindate: Date, enddate: Date, user: User}): Readonly<Loan> {
+        return {
+            id,
+            title,
+            author,
+            begindate,
+            enddate,
+            user
+        } as const;
+    }
+}

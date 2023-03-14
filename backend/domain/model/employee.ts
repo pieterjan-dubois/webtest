@@ -1,36 +1,33 @@
-class Employee {
+import {Loan} from "./loan";
+
+export class Employee {
     id?: number;
     name: string;
     lastname: string;
     salaris: number;
     email: string;
-  
-    constructor(name: string, lastname: string, salaris: number, email: string) {
-      if (!name) {
-        throw new Error("Name is required.");
-      }
-      if (!lastname) {
-        throw new Error("Lastname is required.");
-      }
-      if (!salaris) {
-        throw new Error("Salaris date is required.");
-      }
 
-      if (!this.isValidEmail(email)) {
-        throw new Error('Invalid email');
-      }
-    
-      this.email = email;
-      
-  
-      this.name = name;
-      this.lastname = lastname;
-      this.salaris = salaris;
+    loans: Loan[];
+
+
+    constructor(id: number, name: string, lastname: string, salaris: number, email: string, loans: Loan[]) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.salaris = salaris;
+        this.email = email;
+        this.loans = loans;
     }
 
-    private isValidEmail(email: string): boolean {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+    static create({id, name, lastname, salaris, email}: {id?: number, name: string, lastname: string, salaris: number, email: string}): Readonly<Employee> {
+        return {
+            id,
+            name,
+            lastname,
+            salaris,
+            email,
+            loans: [] as Loan[]
+        } as const;
     }
 
   }
