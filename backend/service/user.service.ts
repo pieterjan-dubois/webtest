@@ -2,6 +2,9 @@ import { User } from '../domain/model/user';
 import userDB from "../domain/data-access/user.db";
 import { UserInput } from '../types/types';
 import {PrismaClient} from "@prisma/client";
+
+
+
 const prisma = new PrismaClient();
 
 const getAllUsers = async (): Promise<User[]> => await userDB.getAllUsers();
