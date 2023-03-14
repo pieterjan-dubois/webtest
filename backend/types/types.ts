@@ -1,5 +1,6 @@
 import {Loan} from "../domain/model/loan";
 import {User} from "../domain/model/user";
+import {Employee} from "../domain/model/employee";
 
 export interface BookInput {
     id: number;
@@ -26,6 +27,7 @@ export interface LoanInput {
     begindate: Date;
     enddate: Date;
     user: User;
+    employee: Employee;
 }
 
 export interface EmployeeInput {
@@ -34,5 +36,6 @@ export interface EmployeeInput {
     lastname: string;
     salaris: number;
     email: string;
+    loans: Loan[];
 }
 

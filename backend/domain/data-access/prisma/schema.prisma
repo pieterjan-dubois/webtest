@@ -27,5 +27,16 @@ model Loan {
   begindate DateTime
   enddate   DateTime
   userId    Int?
+  employeeId    Int?
   user      User?  @relation(fields: [userId], references: [id])
+  employee      Employee?  @relation(fields: [employeeId], references: [id])
+}
+
+model Employee {
+  id       Int      @id @default(autoincrement())
+  name     String
+  lastname String
+  salsris  Number
+  email    String  @unique
+  loans    Loan[]
 }
