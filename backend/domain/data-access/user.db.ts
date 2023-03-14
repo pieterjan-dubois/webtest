@@ -60,4 +60,6 @@ const addUser = async (user: User): Promise<User> => {
     }
 };
 
+
+
 export default {getAllUsers, getUserById, addUser};
