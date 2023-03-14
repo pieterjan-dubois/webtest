@@ -21,7 +21,7 @@ const getAllEmployees = async (): Promise<Employee[]> => {
     }
 }
 
-const getEmployeeById = async (employeeId: number): Promise<Employee[]> => {
+const getEmployeeById = async (employeeId: { id: number }): Promise<Employee[]> => {
     try {
         const userPrisma = await prisma.employee.findUnique({
             where: {

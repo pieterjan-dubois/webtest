@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 const getAllUsers = async (): Promise<User[]> => await userDB.getAllUsers();
 
-const getUserById = ({ id }: UserInput): User => {
+const getUserById = ({ id }: UserInput): Promise<User[]> => {
     if (Number.isNaN(Number(id))){
         throw new Error('Id must be numeric.');
     }
@@ -19,7 +19,7 @@ const getUserById = ({ id }: UserInput): User => {
     return user;
 };
 
-const addUser = ({ name, lastname, address, email, password }: UserInput): number => {
+const addUser = ({ name, lastname, address, email, password }: UserInput): Promise<User> => {
     const user = new User(name, lastname, address, email, password);
     return userDB.addUser(user);
 };

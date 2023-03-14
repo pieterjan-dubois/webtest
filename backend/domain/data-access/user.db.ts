@@ -21,7 +21,7 @@ const getAllUsers = async (): Promise<User[]> => {
         throw new Error('DB error. See service log')
     }
 }
-const getUserById = async (userId: number): Promise<User[]> => {
+const getUserById = async (userId: { id: number }): Promise<User[]> => {
     try {
         const userPrisma = await prisma.user.findUnique({
             where: {

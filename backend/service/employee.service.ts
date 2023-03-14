@@ -2,9 +2,9 @@ import { Employee } from '../domain/model/employee';
 import { EmployeeInput } from '../types/types';
 import EmployeeDb from "../domain/data-access/employee.db";
 
-const getAllEmployees = (): Employee[] => EmployeeDb.getAllEmployees();
+const getAllEmployees = async (): Promise<Employee[]> => await EmployeeDb.getAllEmployees();
 
-const getEmployeeById = ({ id }: EmployeeInput): Employee => {
+const getEmployeeById = ({ id }: EmployeeInput): Promise<Employee[]> => {
     if (Number.isNaN(Number(id))){
         throw new Error('Id must be numeric.');
     }
@@ -17,8 +17,8 @@ const getEmployeeById = ({ id }: EmployeeInput): Employee => {
     return employee;
 };
 
-const addEmployee = ({ name, lastname, salaris, email }: EmployeeInput): number => {
-    const employee = new Employee(name, lastname, salaris, email);
+const addEmployee = ({ id, name, lastname, salaris, email,loans }: EmployeeInput): Promise<Employee> => {
+    const employee = new Employee(id, name, lastname, salaris, email, loans);
     return EmployeeDb.addEmployee(employee);
 };
 

@@ -1,4 +1,4 @@
-import express, { Request, Response, handler } from 'express';
+import express, { Request, Response } from 'express';
 import * as userModel from '../domain/model/user';
 
 
